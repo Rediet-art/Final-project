@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>App Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=consent.html">
+
+</head>
+<body class="app-body">
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <div class="header">
+      <h2>What do you want to understand today?</h2>
+    </div>
+    <!-- Auth Buttons -->
+  <div class="auth-buttons">
+    
+  <button class="btn outline" onclick="location.href='login.html'">Login</button>
+  <button class="btn primary" onclick="location.href='signup.html'">Sign Up</button>
+ </div>
+
+<!-- Action Buttons -->
+<div class="action-buttons">
+    <button class="btn primary" onclick="location.href='consent.html'">Consent</button>
+  <button class="btn outline">Upload PDF</button>
+  <button class="btn primary" onclick="location.href='input.html'">Paste text</button>
+<button class="btn outline" onclick="location.href='voice.html'">
+  🎤 Voice Input
+</button>
+
+</div>
+
+    <!-- History Section -->
+    <div class="section-title">History</div>
+
+    <div class="history-card">
+      <div class="history-icon">🧬</div>
+      <div class="history-text">What is DNA?</div>
+    </div>
+
+    <div class="history-card">
+      <div class="history-icon">🌍</div>
+      <div class="history-text">How does money work?</div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+  <a href="index.html" class="nav-item active">🏠<span>Home</span></a>
+  <a href="explore.html" class="nav-item">🔍<span>Explore</span></a>
+  <a href="profile.html" class="nav-item">👤<span>Profile</span></a>
+</div>
+
+
+  </div>
+  <script>
+      if (!localStorage.getItem("parentalConsent")) {
+        window.location.href = "index.html";
+      }
+</script>
+
+</body>
+</html>

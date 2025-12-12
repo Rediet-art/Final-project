@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Input</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="app-body">
+
+  <div class="app-container">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">←</a>
+      <h3>Voice Input</h3>
+    </div>
+
+    <!-- Mic Area -->
+    <div class="mic-section">
+      <div class="mic-circle">🎤</div>
+      <p class="mic-text">Tap to speak</p>
+    </div>
+
+    <!-- Result Box -->
+    <div class="voice-result">
+      <button id="startVoiceBtn">🎤 Speak</button>
+<p id="status">Tap the microphone to speak</p>
+<textarea id="questionInput" placeholder="Your question will appear here..."></textarea>
+      <p>Your speech will appear here...</p>
+    </div>
+
+    <!-- Continue Button -->
+    <a href="generate.html" class="btn primary full-btn">
+      Continue
+    </a>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-item">🏠<span>Home</span></a>
+      <a href="explore.html" class="nav-item">🔍<span>Explore</span></a>
+      <a href="profile.html" class="nav-item">👤<span>Profile</span></a>
+    </div>
+    
+
+<script>
+    // Check if the browser supports Speech Recognition
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;  // Only final results
+    recognition.maxAlternatives = 1;
+
+    const startBtn = document.getElementById("startVoiceBtn");
+    const statusText = document.getElementById("status");
+    const questionInput = document.getElementById("questionInput");
+
+    // When button is clicked → start listening
+    startBtn.addEventListener("click", () => {
+        recognition.start();
+        statusText.innerText = "Listening… speak now!";
+    });
+
+    // When speech is captured
+    recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        questionInput.value = text;
+        statusText.innerText = "Voice captured!";
+    };
+
+    // If the user stops talking
+    recognition.onspeechend = () => {
+        recognition.stop();
+        statusText.innerText = "Processing voice…";
+    };
+
+    // Errors (e.g., microphone blocked)
+    recognition.onerror = (event) => {
+        statusText.innerText = "Error: " + event.error;
+    };
+</script>
+ 
+
+
+  </div>
+
+</body>
+</html>

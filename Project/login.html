@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="app-body">
+
+  <div class="app-container center-container">
+
+    <div class="emoji-bubble">😊</div>
+
+    <h2 class="login-title">Welcome Back</h2>
+    <p class="login-subtitle">Login to continue</p>
+
+    <form action="index.html" class="login-form">
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button class="btn primary full-btn">Login</button>
+    </form>
+
+    <p class="switch-text">
+      Don’t have an account? <a href="signup.html">Sign up</a>
+    </p>
+
+  </div>
+   <script>
+      if (!localStorage.getItem("parentalConsent")) {
+        window.location.href = "index.html"; 
+      }
+</script>
+
+</body>
+</html>
+
