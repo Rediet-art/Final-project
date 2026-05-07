@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parental Consent</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+      <body>
+   <div class="consent-container">
+
+  <h2>👨‍👩‍👧 Parental Consent</h2>
+
+  <p class="consent-text">
+    This application helps children understand complex topics in a simple and engaging way.
+    Before your child uses this app, we require consent from a parent or guardian.
+  </p>
+
+  <form class="consent-form">
+
+    <div class="form-group">
+      <label>Child's Name</label>
+      <input type="text" id="childName" required>
+    </div>
+
+    <div class="form-group">
+      <label>Parent/Guardian Name</label>
+      <input type="text" id="parentName" required>
+    </div>
+
+    <div class="form-group">
+      <label>Signature</label>
+      <input type="text" placeholder="Type your full name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" required>
+    </div>
+
+    <button type="button" onclick="giveConsent()" class="consent-btn">
+      Agree & Continue
+    </button>
+
+  </form>
+
+</div>
+ <script>
+      function giveConsent() {
+        console.log("Consent given"); // debug
+
+        localStorage.setItem("parentalConsent", "true");
+
+        // Redirect to LOGIN (not dashboard)
+        window.location.href = "login.html";
+      }
+
+
+    function saveConsent() {
+    const name = document.getElementById("parentName");
+    
+
+    // Trigger built-in HTML validation
+    if (!name.checkValidity()) {
+      name.reportValidity();
+      
+      return;
+    }
+    localStorage.setItem("parentalConsent", "true");
+    localStorage.setItem("parentName", name.value.trim());
+     localStorage.setItem("consentDate", new Date().toISOString());
+    window.location.href = "login.html";
+  }
+</script>
+
+
+
+</body>
+</html>

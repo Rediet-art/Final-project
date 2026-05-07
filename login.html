@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+</head>
+<body class="app-body">
+  
+  <div class="auth-container">
+
+  <h2>😊 Welcome Back</h2>
+  <p class="subtitle">Login to continue</p>
+
+  <form class="auth-form">
+
+    <div class="form-group">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+    </div>
+
+    <div class="form-group">
+      <input type="password" id="loginPassword" placeholder="Password" required>
+    </div>
+
+    <button type="button" onclick="loginUser()" class="auth-btn">
+      Login
+    </button>
+
+  </form>
+
+  <p class="auth-footer">
+    Don’t have an account? <a href="signup.html">Sign up</a>
+  </p>
+
+</div>
+   <script>
+
+      if (localStorage.getItem("parentalConsent") !== "true") {
+    window.location.replace("index.html"); // consent page
+  }
+
+  function loginUser(event) {
+    event.preventDefault(); // stops form from submitting and refreshing the page
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    const savedEmail = localStorage.getItem("userEmail");
+    const savedPassword = localStorage.getItem("userPassword");
+
+    console.log("Entered:", email, password);
+    console.log("Saved:", savedEmail, savedPassword);
+
+    if (!savedEmail || !savedPassword) {
+      alert("No account found. Please sign up first.");
+      return;
+    }
+
+    if (email === savedEmail && password === savedPassword) {
+      localStorage.setItem("loggedInUser", email);
+       // ✅ CHECK CONSENT
+    const consent = localStorage.getItem("parentalConsent");
+
+    if (consent !== "true") {
+      // 🚨 Go to consent page first
+      window.location.href = "consent.html";
+    } else {
+      // ✅ Already consented
+      window.location.href = "dashboard.html";
+    }
+
+  } else {
+    alert("Invalid email or password.");
+  }
+}
+</script>
+<script src="login.js"></script>
+<script src="login.test.js"></script>
+
+</body>
+</html>
+

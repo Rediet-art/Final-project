@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="app-body">
+
+<script>
+  // Optional: clear session/login data here
+  localStorage.removeItem("loggedInUser"); // if you use it
+
+  // Redirect to login page
+  setTimeout(() => {
+    window.location.replace("login.html");
+  }, 1000);
+</script>
+
+<div class="app-container center-container">
+  <h2>You have been logged out</h2>
+  <p>Redirecting to login...</p>
+</div>
+
+</body>
+</html>

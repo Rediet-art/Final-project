@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div class="history-container">
+
+  <h2>📜 Your History</h2>
+
+  <p id="loginMessage"></p>
+
+  <button onclick="clearHistory()" class="clear-btn">Clear All History</button>
+
+  <div id="historyContainer"></div>
+
+</div>
+
+ <script>
+    window.onload = function () {
+
+    const user = localStorage.getItem("loggedInUser");
+
+      if (!user) {
+         document.getElementById("historyContainer").innerHTML =
+         "<p>Please log in to view history.</p>";
+        return;
+     }
+
+      const historyKey = "history_" + user;
+      const container = document.getElementById("historyContainer");
+
+       function getHistory() {
+           return JSON.parse(localStorage.getItem(historyKey)) || [];
+       }
+
+      function displayHistory() {
+        const history = getHistory();
+
+        container.innerHTML = "";
+
+        if (history.length === 0) {
+         container.innerHTML = "<p>No history yet.</p>";
+          return;
+        }
+
+        history.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+
+        div.innerHTML = `
+          <p><strong>Question:</strong> ${item.question}</p>
+          <p><strong>Explanation:</strong> ${item.explanation}</p>
+          <p><small>${item.date}</small></p>
+          <button onclick="deleteItem(${index})">Delete</button>
+          <hr>
+        `;
+
+       container.appendChild(div);
+      });
+  }
+
+  // Make functions global so buttons can access them
+  window.deleteItem = function (index) {
+    let history = getHistory();
+
+    history.splice(index, 1);
+    localStorage.setItem(historyKey, JSON.stringify(history));
+
+    displayHistory();
+  };
+
+    window.clearHistory = function () {
+     localStorage.removeItem(historyKey);
+     displayHistory();
+    };
+
+   displayHistory();
+};
+</script>
+
+
+</body>
+</html>

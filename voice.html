@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Input</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="voice-container">
+
+  <h2>🎤 Voice Input</h2>
+  <p class="subtitle">Tap the microphone and ask your question</p>
+
+  <!-- MIC BUTTON -->
+  <button id="startVoiceBtn" class="mic-btn">🎤 Speak</button>
+
+  <p id="status" class="status-text">Tap to speak</p>
+
+  <!-- INPUT BOX -->
+  <textarea id="questionInput" placeholder="Your question will appear here..."></textarea>
+
+  <!-- RESULT -->
+  <div id="voiceResultBox" class="result-box"></div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="voice-actions">
+    <button onclick="sendVoiceQuestion()" class="primary-btn">Continue</button>
+    <button onclick="speakText(document.getElementById('voiceResultBox').innerText)" class="secondary-btn">
+      🔊 Replay
+      </button><button onclick="resetVoice()" class="refresh-btn">🔄 New Question</button>
+    </div>
+
+</div>
+    
+
+<script>
+    // Check if the browser supports Speech Recognition
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.continuous = true; // Keep listening until user stops
+    recognition.interimResults = true;  // Show results even while still speaking
+    recognition.maxAlternatives = 1;
+
+    const startBtn = document.getElementById("startVoiceBtn");
+    const statusText = document.getElementById("status");
+    const questionInput = document.getElementById("questionInput");
+
+    // When button is clicked → start listening
+    startBtn.addEventListener("click", () => {
+        recognition.start();
+        statusText.innerText = "Listening… speak now!";
+    });
+
+    // When speech is captured
+    recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        questionInput.value = text;
+        statusText.innerText = "Voice captured!";
+    };
+
+    // If the user stops talking
+    recognition.onspeechend = () => {
+        recognition.stop();
+        statusText.innerText = "Processing voice…";
+    };
+
+    // Errors (e.g., microphone blocked)
+    recognition.onerror = (event) => {
+       statusText.innerText = "Error: " + event.error;
+    };
+
+      function speakText(text) {
+        window.speechSynthesis.cancel(); // stop previous speech
+         // Remove emojis for clearer speech output
+        const cleanText = text.replace(/[^\w\s.,!?]/g, "");
+
+        const speech = new SpeechSynthesisUtterance(text);
+
+        speech.rate = 0.85; // slower for kids
+        speech.pitch = 1.1;
+
+        window.speechSynthesis.speak(speech);
+      }
+
+      async function sendVoiceQuestion() {
+        const question = document.getElementById("questionInput").value.trim();
+        const resultBox = document.getElementById("voiceResultBox");
+
+           if (!question) {
+          alert("Please say something first.");
+    return;
+  }
+
+  resultBox.innerText = "Let me think about it...";
+
+  try {
+    const response = await fetch("http://localhost:3000/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        question: question,
+        level: "5-8" // or dynamically set if you want
+      })
+    });
+
+    const data = await response.json();
+
+    resultBox.innerText = data.explanation;
+
+    // 🔊 SPEAK RESULT
+    speakText(data.explanation);
+
+  } catch (error) {
+    console.error(error);
+    resultBox.innerText = "Error getting explanation.";
+  }
+}
+function resetVoice() {
+  // Clear input
+  document.getElementById("questionInput").value = "";
+
+  // Clear result
+  document.getElementById("voiceResultBox").innerText = "";
+
+  // Reset status text
+  document.getElementById("status").innerText = "Tap to speak";
+
+  // Stop any ongoing speech
+  window.speechSynthesis.cancel();
+
+  console.log("Voice reset");
+}
+</script>
+ 
+
+
+  </div>
+
+</body>
+</html>
