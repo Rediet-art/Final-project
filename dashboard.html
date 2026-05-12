@@ -12,16 +12,26 @@
 
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
-  <div class="logo">Nao5 AI Learn</div>
+  <a class="logo" href="dashboard.html">
+    <img src="Images/logo.png" alt="Nao5 AI Learn logo" class="logo-img">
+    <span>Nao5 AI Learn</span>
+  </a>
 
   <ul class="nav-links">
     <li><a href="dashboard.html">Home</a></li>
     <li><a href="history.html">History</a></li>
     <li><a href="voice.html">Voice</a></li>
     <li><a href="explore.html">Explore</a></li>
-  </ul>
+    <li><a href="profile.html">Profile</a></li>
+   
+</ul>
 
-  <div class="auth-buttons">
+  <a class="nav-user" href="profile.html">
+    <i class="fas fa-user-circle"></i>
+    <span id="navUsername">Guest</span>
+  </a>
+
+  <div class="auth-buttons" id="authButtons">
     <a href="login.html" class="nav-btn">Login</a>
     <a href="signup.html" class="nav-btn signup">Sign Up</a>
   </div>
@@ -78,6 +88,10 @@
 
 <!-- ===== SCRIPT ===== -->
 <script>
+if (localStorage.getItem("parentalConsent") !== "true") {
+  window.location.replace("consent.html");
+}
+
 async function generateExplanation() {
   const question = document.getElementById("questionInput").value.trim();
   const resultBox = document.getElementById("resultBox");
@@ -111,7 +125,6 @@ async function generateExplanation() {
     resultBox.innerText = "Error generating response.";
   }
 }
-
 function saveToHistory(question, explanation) {
   const user = localStorage.getItem("loggedInUser");
   if (!user) return;
@@ -127,8 +140,24 @@ function saveToHistory(question, explanation) {
 
   localStorage.setItem(historyKey, JSON.stringify(history));
 }
+function showLoggedInUser() {
+  const loggedInName = localStorage.getItem("loggedInName");
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const navUsername = document.getElementById("navUsername");
+  const authButtons = document.getElementById("authButtons");
+
+  if (loggedInUser) {
+    navUsername.innerText = loggedInName || loggedInUser;
+    authButtons.style.display = "none";
+  } else {
+    navUsername.innerText = "Guest";
+    authButtons.style.display = "flex";
+  }
+}
 
 window.onload = () => {
+  showLoggedInUser();
+
   const topic = localStorage.getItem("selectedTopic");
 
   if (topic) {

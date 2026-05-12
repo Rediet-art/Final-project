@@ -18,7 +18,6 @@ function validateLogin(email, password) {
 
   return { success: false, message: "Invalid email or password" };
 }
-
 // ===============================
 // HANDLE LOGIN BUTTON (UI)
 // ===============================

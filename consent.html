@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parental Consent</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="consent-container">
+    <h2>Parental Consent</h2>
+
+    <p class="consent-text">
+      This application helps children understand complex topics in a simple and engaging way.
+      Before your child uses this app, we require consent from a parent or guardian.
+    </p>
+
+    <form class="consent-form" onsubmit="saveConsent(event)">
+      <div class="form-group">
+        <label>Child's Name</label>
+        <input type="text" id="childName" required>
+      </div>
+
+      <div class="form-group">
+        <label>Parent/Guardian Name</label>
+        <input type="text" id="parentName" required>
+      </div>
+
+      <div class="form-group">
+        <label>Signature</label>
+        <input type="text" id="parentSignature" placeholder="Type your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="consentDateInput" required>
+      </div>
+
+      <button type="submit" class="consent-btn">
+        Agree & Continue
+      </button>
+    </form>
+  </div>
+
+  <script>
+    function saveConsent(event) {
+      event.preventDefault();
+
+      const childName = document.getElementById("childName").value.trim();
+      const parentName = document.getElementById("parentName").value.trim();
+      const parentSignature = document.getElementById("parentSignature").value.trim();
+      const consentDate = document.getElementById("consentDateInput").value;
+
+      localStorage.setItem("parentalConsent", "true");
+      localStorage.setItem("childName", childName);
+      localStorage.setItem("parentName", parentName);
+      localStorage.setItem("parentSignature", parentSignature);
+      localStorage.setItem("consentDate", consentDate || new Date().toISOString());
+
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

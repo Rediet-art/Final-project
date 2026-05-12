@@ -18,6 +18,10 @@
 </div>
 
  <script>
+    if (localStorage.getItem("parentalConsent") !== "true") {
+      window.location.replace("consent.html");
+    }
+
     window.onload = function () {
 
     const user = localStorage.getItem("loggedInUser");
@@ -35,7 +39,7 @@
            return JSON.parse(localStorage.getItem(historyKey)) || [];
        }
 
-      function displayHistory() {
+  function displayHistory() {
         const history = getHistory();
 
         container.innerHTML = "";
@@ -60,7 +64,6 @@
        container.appendChild(div);
       });
   }
-
   // Make functions global so buttons can access them
   window.deleteItem = function (index) {
     let history = getHistory();

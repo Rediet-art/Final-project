@@ -9,61 +9,125 @@
 <body class="auth-page">
 
   <div class="auth-container">
+    <h2>Create Account</h2>
+    <p class="subtitle">Join and start learning</p>
 
-  <h2>Create Account</h2>
-  <p class="subtitle">Join and start learning</p>
+    <form class="auth-form" onsubmit="signupUser(event)">
+      <div class="form-group">
+        <input type="text" id="fullName" placeholder="Full Name" required>
+      </div>
 
-  <form class="auth-form">
+      <div class="form-group">
+        <input type="email" id="signupEmail" placeholder="Email" required>
+      </div>
 
-    <div class="form-group">
-      <input type="text" id="fullName" placeholder="Full Name" required>
-    </div>
+      <div class="form-group">
+        <input type="password" id="signupPassword" placeholder="Password" required>
+      </div>
 
-    <div class="form-group">
-      <input type="email" id="signupEmail" placeholder="Email" required>
-    </div>
+      <div class="form-group">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      </div>
 
-    <div class="form-group">
-      <input type="password" id="signupPassword" placeholder="Password" required>
-    </div>
+      <button type="submit" class="auth-btn">
+        Sign Up
+      </button>
+    </form>
 
-    <div class="form-group">
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-    </div>
+    <p class="auth-footer">
+      Already have an account? <a href="login.html">Login</a>
+    </p>
+  </div>
 
-    <button type="button" onclick="signupUser()" class="auth-btn">
-      Sign Up
-    </button>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    if (localStorage.getItem("parentalConsent") !== "true") {
+      window.location.replace("consent.html");
+    }
 
-  </form>
+    const EMAILJS_PUBLIC_KEY = "w9ym56K3Xuhd3IV3D";
+    const EMAILJS_SERVICE_ID = "service_15u1ecc";
+    const EMAILJS_TEMPLATE_ID = "template_ptpfq1a";
 
-  <p class="auth-footer">
-    Already have an account? <a href="login.html">Login</a>
-  </p>
+    function isEmailJsConfigured() {
+      return (
+        EMAILJS_PUBLIC_KEY &&
+        EMAILJS_SERVICE_ID &&
+        EMAILJS_TEMPLATE_ID
+      );
+    }
 
-</div>
-<script>
-  function signupUser() {
-  const email = document.getElementById("signupEmail").value.trim();
-  const password = document.getElementById("signupPassword").value.trim();
-  const confirm = document.getElementById("confirmPassword").value.trim();
+    if (isEmailJsConfigured() && typeof emailjs !== "undefined") {
+      emailjs.init({
+        publicKey: EMAILJS_PUBLIC_KEY
+      });
+    }
 
-  if (password !== confirm) {
-    alert("Passwords do not match!");
-    return;
-  }
+    async function sendSignupNotification(fullName, email) {
+      if (!isEmailJsConfigured() || typeof emailjs === "undefined") {
+        console.warn("EmailJS is not available. Signup details were saved, but no email was sent.");
+        return;
+      }
 
-  // Save user
-  localStorage.setItem("userEmail", email);
-  localStorage.setItem("userPassword", password);
+      const templateParams = {
+        name: fullName,
+        email: email,
+        full_name: fullName,
+        user_email: email,
+        signup_time: new Date().toLocaleString(),
+        message: `${fullName} signed up with ${email}.`
+      };
 
-  alert("Signup successful!");
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+    }
 
-  window.location.href = "login.html";
-}
-</script>
+    // ======================== signupUser() ========================
+    async function signupUser(event) {
+      event.preventDefault();
 
-   
+      const fullName = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const password = document.getElementById("signupPassword").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
+      const submitButton = event.target.querySelector("button[type='submit']");
+
+      if (!fullName || !email || !password || !confirmPassword) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return;
+      }
+
+      localStorage.setItem("fullName", fullName);
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPassword", password);
+
+      try {
+        submitButton.disabled = true;
+        await sendSignupNotification(fullName, email);
+      } catch (error) {
+        console.error("Signup notification email failed:", error);
+      } finally {
+        submitButton.disabled = false;
+      }
+
+      alert("Account created successfully!");
+      window.location.href = "login.html";
+    }
+    // ====================== END signupUser() ======================
+  </script>
 
 </body>
 </html>

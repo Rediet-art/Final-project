@@ -38,36 +38,31 @@
    <script>
 
       if (localStorage.getItem("parentalConsent") !== "true") {
-    window.location.replace("index.html"); // consent page
+    window.location.replace("consent.html"); // consent page
   }
 
-  function loginUser(event) {
-    event.preventDefault(); // stops form from submitting and refreshing the page
+  // ======================== HIGHLIGHT: loginUser() ========================
+  function loginUser() {
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
 
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
 
-    const savedEmail = localStorage.getItem("userEmail");
-    const savedPassword = localStorage.getItem("userPassword");
+  const savedEmail = localStorage.getItem("userEmail");
+  const savedPassword = localStorage.getItem("userPassword");
+  const savedName = localStorage.getItem("fullName");
 
-    console.log("Entered:", email, password);
-    console.log("Saved:", savedEmail, savedPassword);
+  if (email === savedEmail && password === savedPassword) {
 
-    if (!savedEmail || !savedPassword) {
-      alert("No account found. Please sign up first.");
-      return;
-    }
+    // Save active user session
+    localStorage.setItem("loggedInUser", email);
+    localStorage.setItem("loggedInName", savedName);
 
-    if (email === savedEmail && password === savedPassword) {
-      localStorage.setItem("loggedInUser", email);
-       // ✅ CHECK CONSENT
+    // Consent check
     const consent = localStorage.getItem("parentalConsent");
 
     if (consent !== "true") {
-      // 🚨 Go to consent page first
       window.location.href = "consent.html";
     } else {
-      // ✅ Already consented
       window.location.href = "dashboard.html";
     }
 
@@ -75,10 +70,8 @@
     alert("Invalid email or password.");
   }
 }
+// ====================== END HIGHLIGHT: loginUser() ======================
 </script>
-<script src="login.js"></script>
-<script src="login.test.js"></script>
-
 </body>
 </html>
 

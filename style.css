@@ -10,12 +10,26 @@
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-weight: bold;
   font-size: 18px;
+  color: #111827;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .nav-links {
-  list-style: none;
+ position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%); list-style: none;
   display: flex;
   gap: 20px;
  font-size:20px;
@@ -28,6 +42,21 @@
 .auth-buttons {
   display: flex;
   gap: 10px;
+}
+
+.nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-user i {
+  color: #830ea0;
+  font-size: 24px;
 }
 
 .nav-btn {
@@ -49,6 +78,58 @@
 body {
   background: linear-gradient(to bottom, #eef2ff, #ffffff);
   font-family: Arial, sans-serif;
+}
+
+/* ===== LANDING PAGE ===== */
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.landing-container {
+  width: min(90%, 620px);
+  text-align: center;
+  padding: 48px 20px;
+}
+
+.landing-logo {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  margin-bottom: 18px;
+}
+
+.landing-container h1 {
+  margin: 0 0 12px;
+  font-size: 42px;
+  color: #111827;
+}
+
+.landing-container p {
+  margin: 0 auto 28px;
+  max-width: 520px;
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.landing-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: 8px;
+  background: #830ea0;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.landing-btn:hover {
+  background: #6f0b88;
 }
 
 .dashboard-container {
@@ -523,4 +604,117 @@ textarea {
 .topic-card:hover {
   background: #eef2ff;
   transform: translateY(-2px);
+}/* ===== PROFILE PAGE ===== */
+
+.profile-container {
+  max-width: 500px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+.profile-card {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}.profile-card p {
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.logout-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}.logout-btn:hover {
+  background: #dc2626;
+}/* ===== DARK MODE ===== */
+
+.dark-mode {
+  background: #111827;
+  color: white;
+}
+
+/* Navbar */
+.dark-mode .navbar {
+  background: #1f2937;
+}
+
+.dark-mode .navbar a,
+.dark-mode .logo {
+  color: white;
+}
+
+/* Profile Card */
+.dark-mode .profile-card {
+  background: #1e293b;
+  color: white;
+}
+
+/* Text */
+.dark-mode .profile-card p,
+.dark-mode .profile-card strong,
+.dark-mode #profileName,
+.dark-mode #profileEmail,
+.dark-mode #lastLogin,
+.dark-mode h2,
+.dark-mode h3 {
+  color: white;
+}
+
+/* Inputs */
+.dark-mode .edit-section input {
+  background: #374151;
+  color: white;
+  border: 1px solid #4b5563;
+}
+
+.dark-mode .edit-section input::placeholder {
+  color: #d1d5db;
+}
+
+/* Buttons */
+.dark-mode .dark-btn,
+.dark-mode .edit-btn {
+  background: #374151;
+  color: white;
+  border: none;
+}
+
+/* Optional smoother transition */
+body,
+.navbar,
+.profile-card,
+input,
+button {
+  transition: all 0.3s ease;
+}.edit-section {
+  display: none;
+  
+}
+
+.edit-section input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #1d4ed8;
 }
