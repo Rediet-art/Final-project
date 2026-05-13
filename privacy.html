@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Explore</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="app-body">
+<body>
 
-<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
   <a class="logo" href="dashboard.html">
     <img src="Images/logo.png" alt="Nao5 AI Learn logo" class="logo-img">
@@ -35,54 +34,37 @@
   </div>
 </nav>
 
-  <div class="explore-container">
+<main class="policy-container">
+  <h1>Privacy Policy</h1>
+  <p class="subtitle">Last updated: May 2026</p>
 
-  <h2>🔍 Explore</h2>
-  <p class="subtitle">Discover fun topics to learn</p>
+  <section>
+    <h2>What We Store</h2>
+    <p>Nao5 AI Learn may store your name, email address, selected topics, and question history in your browser using local storage.</p>
+  </section>
 
-  <div class="topics">
+  <section>
+    <h2>How We Use Information</h2>
+    <p>This information is used to show your profile, remember your learning history, and improve your experience inside the app.</p>
+  </section>
 
-    <div class="topic-card" onclick="selectTopic('How space works')">
-      🚀 How space works
-    </div>
+  <section>
+    <h2>Children's Privacy</h2>
+    <p>The app asks for parental consent before use. Children should use the app with permission from a parent or guardian.</p>
+  </section>
 
-    <div class="topic-card" onclick="selectTopic('How animals think')">
-      🐾 How animals think
-    </div>
+  <section>
+    <h2>Voice Input</h2>
+    <p>If you use the voice page, your browser may process speech input so your question can be converted into text.</p>
+  </section>
 
-    <div class="topic-card" onclick="selectTopic('How machines work')">
-      ⚙️ How machines work
-    </div>
-
-    <div class="topic-card" onclick="selectTopic('How oceans move')">
-      🌊 How oceans move
-    </div>
-
-    <div class="topic-card" onclick="selectTopic('How volcanoes erupt')">
-      🌋 How volcanoes erupt
-    </div>
-
-    <div class="topic-card" onclick="selectTopic('Why we dream')">
-      🌙 Why we dream
-    </div>
-
-    <div class="topic-card" onclick="selectTopic('How electricity works')">
-      ⚡ How electricity works
-    </div>
-
-    <div class="topic-card" onclick="selectTopic('How plants grow')">
-      🌱 How plants grow
-    </div>
-
-  </div>
-
-</div>
+  <section>
+    <h2>Contact</h2>
+    <p>If you have questions about this policy, contact us at mail@nao5ai.com.</p>
+  </section>
+</main>
 
 <script>
-  if (localStorage.getItem("parentalConsent") !== "true") {
-    window.location.replace("consent.html");
-  }
-
   function showLoggedInUser() {
     const loggedInName = localStorage.getItem("loggedInName");
     const loggedInUser = localStorage.getItem("loggedInUser");
@@ -98,13 +80,8 @@
     }
   }
 
-  function selectTopic(topic) {
-    alert("You selected: " + topic);
-    localStorage.setItem("selectedTopic", topic);
-    window.location.href = "dashboard.html";
-  }
-
   window.onload = showLoggedInUser;
 </script>
+
 </body>
 </html>

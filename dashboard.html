@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="dashboard-page">
 
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
@@ -40,49 +40,73 @@
 <!-- ===== MAIN CONTENT ===== -->
 <div class="dashboard-container">
 
-  <h1 class="title">
-    Understand Anything.<br>
-    <span>Explained Simply</span>
-  </h1>
+  <section class="dashboard-hero">
+    <p class="dashboard-kicker">Learning Lab</p>
+    <h1 class="title">
+      Ask a big question.<br>
+      <span>Get a simple answer.</span>
+    </h1>
 
-  <p class="subtitle">
-    Turn complex ideas into easy explanations anyone can understand.
-  </p>
+    <p class="subtitle">
+      Choose the age level and tone, then turn tricky ideas into clear, friendly explanations.
+    </p>
+  </section>
 
   <!-- ===== INPUT CARD ===== -->
-  <div class="card">
+  <div class="dashboard-main">
+    <div class="card ask-card">
 
-    <textarea id="questionInput" placeholder="Ask a question..."></textarea>
+      <label class="question-label" for="questionInput">What would you like to understand?</label>
+      <textarea id="questionInput" placeholder="Ask about space, animals, maths, history..."></textarea>
 
-    <div class="controls">
+      <div class="controls">
 
-      <div>
-        <label>Age Level</label>
-        <select id="level">
-          <option value="5-8">Ages 5–8</option>
-          <option value="8-12">Ages 8–12</option>
-        </select>
+        <div>
+          <label>Age Level</label>
+          <select id="level">
+            <option value="5-8">Ages 5-8</option>
+            <option value="8-12">Ages 8-12</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Tone</label>
+          <select id="tone">
+            <option value="simple">Simple</option>
+            <option value="playful">Playful</option>
+          </select>
+        </div>
+
       </div>
 
-      <div>
-        <label>Tone</label>
-        <select id="tone">
-          <option value="simple">Simple</option>
-          <option value="playful">Playful</option>
-        </select>
+      <div class="buttons">
+        <button class="generate-btn" onclick="generateExplanation()">
+          Explain
+          <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
 
     </div>
 
-    <div class="buttons">
-      <button class="voice-btn" onclick="window.location.href='voice.html'">🎤 Voice</button>
-      <button class="generate-btn" onclick="generateExplanation()">Explain</button>
-    </div>
-
+    <aside class="learning-panel">
+      <h2>Try a question</h2>
+      <button type="button" onclick="document.getElementById('questionInput').value='Why is the sky blue?'">
+        Why is the sky blue?
+      </button>
+      <button type="button" onclick="document.getElementById('questionInput').value='How does the heart work?'">
+        How does the heart work?
+      </button>
+      <button type="button" onclick="document.getElementById('questionInput').value='What is climate change?'">
+        What is climate change?
+      </button>
+    </aside>
   </div>
 
   <!-- RESULT -->
-  <div id="resultBox"></div>
+  <div class="result-panel">
+    <p class="result-label">Explanation</p>
+    <div id="resultBox"></div>
+  </div>
 
 </div>
 
@@ -173,7 +197,7 @@ window.onload = () => {
     <!-- LEFT: LEGAL -->
     <div class="footer-column">
       <h4>Legal</h4>
-      <a href="#">Privacy Policy</a>
+      <a href="privacy.html">Privacy Policy</a>
       <a href="#">Terms of Use</a>
     </div>
 
@@ -182,13 +206,20 @@ window.onload = () => {
       <h4>Connect</h4>
 
       <p>📧 mail@nao5ai.com</p>
-      <p>⭐ Reviews</p>
 
       <div class="social-icons">
-        <i class="fab fa-facebook"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-x-twitter"></i>
-        <i class="fab fa-linkedin"></i>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
       </div>
     </div>
 

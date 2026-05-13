@@ -227,7 +227,228 @@ select {
   font-size: 16px;
   line-height: 1.6;
   text-align: center;
-}/* ===== FOOTER ===== */
+}
+
+.dashboard-page {
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(131, 14, 160, 0.12)),
+    #f8f7ff;
+}
+
+.dashboard-page .dashboard-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 46px 22px 34px;
+  text-align: left;
+}
+
+.dashboard-page .dashboard-hero {
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+
+.dashboard-page .dashboard-kicker {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fff1cf;
+  color: #6f0b88;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.dashboard-page .title {
+  margin: 0;
+  color: #17324d;
+  font-size: 46px;
+  line-height: 1.08;
+}
+
+.dashboard-page .title span {
+  color: #2563eb;
+}
+
+.dashboard-page .subtitle {
+  max-width: 620px;
+  margin: 16px 0 0;
+  color: #536471;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.dashboard-page .dashboard-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.8fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.dashboard-page .ask-card,
+.dashboard-page .learning-panel,
+.dashboard-page .result-panel {
+  background: #ffffff;
+  border: 2px solid #e4ddff;
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(23, 50, 77, 0.1);
+}
+
+.dashboard-page .ask-card {
+  max-width: none;
+  margin: 0;
+  padding: 24px;
+}
+
+.dashboard-page .question-label,
+.dashboard-page .controls label,
+.dashboard-page .result-label {
+  display: block;
+  color: #17324d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.dashboard-page .question-label {
+  margin-bottom: 10px;
+}
+
+.dashboard-page textarea {
+  width: 100%;
+  height: 132px;
+  padding: 14px;
+  border: 2px solid #d8d3f8;
+  border-radius: 12px;
+  background: #fbfffe;
+  color: #17324d;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.dashboard-page textarea:focus,
+.dashboard-page select:focus {
+  outline: none;
+  border-color: #830ea0;
+  box-shadow: 0 0 0 4px rgba(131, 14, 160, 0.14);
+}
+
+.dashboard-page .controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.dashboard-page .controls div {
+  width: auto;
+}
+
+.dashboard-page select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 11px 12px;
+  border: 2px solid #d8d3f8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #17324d;
+}
+
+.dashboard-page .buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 18px;
+}
+
+.dashboard-page .generate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.dashboard-page .generate-btn {
+  background: #830ea0;
+  color: white;
+}
+
+.dashboard-page .generate-btn:hover {
+  background: #6f0b88;
+}
+
+.dashboard-page .learning-panel {
+  padding: 22px;
+}
+
+.dashboard-page .learning-panel h2 {
+  margin: 0 0 14px;
+  color: #4c1d95;
+  font-size: 20px;
+}
+
+.dashboard-page .learning-panel button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid #d8d3f8;
+  border-left: 6px solid #2563eb;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #27364a;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: left;
+}
+
+.dashboard-page .learning-panel button:hover {
+  background: #dfe7ff;
+}
+
+.dashboard-page .result-panel {
+  margin-top: 22px;
+  padding: 18px;
+}
+
+.dashboard-page .result-label {
+  margin: 0 0 10px;
+}
+
+.dashboard-page #resultBox {
+  max-width: none;
+  min-height: 76px;
+  margin: 0;
+  padding: 18px;
+  background: #f8f7ff;
+  border: 2px dashed #c7d2fe;
+  border-radius: 12px;
+  color: #27364a;
+  text-align: left;
+}
+
+@media (max-width: 760px) {
+  .dashboard-page .dashboard-container {
+    padding: 32px 16px;
+  }
+
+  .dashboard-page .title {
+    font-size: 34px;
+  }
+
+  .dashboard-page .dashboard-main,
+  .dashboard-page .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-page .buttons {
+    flex-direction: column;
+  }
+}
+/* ===== FOOTER ===== */
 
 .footer {
   background: #0f172a;
@@ -272,6 +493,13 @@ select {
   border-radius: 6px;
   margin-right: 6px;
   cursor: pointer;
+}
+
+.social-icons a {
+  display: inline-block;
+  color: inherit;
+  margin-right: 10px;
+  text-decoration: none;
 }
 
 /* Bottom bar */
@@ -604,7 +832,40 @@ textarea {
 .topic-card:hover {
   background: #eef2ff;
   transform: translateY(-2px);
-}/* ===== PROFILE PAGE ===== */
+}
+
+/* ===== PRIVACY PAGE ===== */
+
+.policy-container {
+  max-width: 780px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.policy-container h1 {
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.policy-container section {
+  margin-top: 24px;
+  padding: 18px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.policy-container h2 {
+  margin-top: 0;
+  color: #830ea0;
+  font-size: 20px;
+}
+
+.policy-container p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+/* ===== PROFILE PAGE ===== */
 
 .profile-container {
   max-width: 500px;

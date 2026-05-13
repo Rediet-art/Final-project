@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
- <div class="history-container">
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <a class="logo" href="dashboard.html">
+    <img src="Images/logo.png" alt="Nao5 AI Learn logo" class="logo-img">
+    <span>Nao5 AI Learn</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="dashboard.html">Home</a></li>
+    <li><a href="history.html">History</a></li>
+    <li><a href="voice.html">Voice</a></li>
+    <li><a href="explore.html">Explore</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+
+  <a class="nav-user" href="profile.html">
+    <i class="fas fa-user-circle"></i>
+    <span id="navUsername">Guest</span>
+  </a>
+
+  <div class="auth-buttons" id="authButtons">
+    <a href="login.html" class="nav-btn">Login</a>
+    <a href="signup.html" class="nav-btn signup">Sign Up</a>
+  </div>
+</nav>
+
+<div class="history-container">
 
   <h2>📜 Your History</h2>
 
@@ -17,14 +47,30 @@
 
 </div>
 
- <script>
+<script>
     if (localStorage.getItem("parentalConsent") !== "true") {
       window.location.replace("consent.html");
     }
 
-    window.onload = function () {
+    function showLoggedInUser() {
+      const loggedInName = localStorage.getItem("loggedInName");
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      const navUsername = document.getElementById("navUsername");
+      const authButtons = document.getElementById("authButtons");
 
-    const user = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        navUsername.innerText = loggedInName || loggedInUser;
+        authButtons.style.display = "none";
+      } else {
+        navUsername.innerText = "Guest";
+        authButtons.style.display = "flex";
+      }
+    }
+
+    window.onload = function () {
+      showLoggedInUser();
+
+      const user = localStorage.getItem("loggedInUser");
 
       if (!user) {
          document.getElementById("historyContainer").innerHTML =
@@ -82,7 +128,6 @@
    displayHistory();
 };
 </script>
-
 
 </body>
 </html>
