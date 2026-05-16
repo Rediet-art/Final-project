@@ -165,6 +165,8 @@
     // save to history
     saveToHistory(question, data.explanation);
 
+    console.log("Voice history saved");
+    
     // SPEAK RESULT
     speakText(data.explanation);
 
@@ -188,6 +190,7 @@ function resetVoice() {
 
   console.log("Voice reset");
 }
+
   function saveToHistory(question, explanation) {
 
   const user =
@@ -208,6 +211,7 @@ function resetVoice() {
     historyKey,
     JSON.stringify(history)
   );
+   
 }
 </script>
  
