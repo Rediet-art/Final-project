@@ -155,15 +155,17 @@
       },
       body: JSON.stringify({
         question: question,
-        level: "5-8" // or dynamically set if you want
+        level: "5-8" // Voice input defaults to 5-8 for simplicity, can be enhanced later to ask user for level
       })
     });
 
     const data = await response.json();
 
     resultBox.innerText = data.explanation;
+    // save to history
+    saveToHistory(question, data.explanation);
 
-    // 🔊 SPEAK RESULT
+    // SPEAK RESULT
     speakText(data.explanation);
 
   } catch (error) {
