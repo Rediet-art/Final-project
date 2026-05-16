@@ -186,6 +186,27 @@ function resetVoice() {
 
   console.log("Voice reset");
 }
+  function saveToHistory(question, explanation) {
+
+  const user =
+    localStorage.getItem("loggedInUser") || "guest";
+
+  const historyKey = "history_" + user;
+
+  const history =
+    JSON.parse(localStorage.getItem(historyKey)) || [];
+
+  history.push({
+    question,
+    explanation,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem(
+    historyKey,
+    JSON.stringify(history)
+  );
+}
 </script>
  
 
