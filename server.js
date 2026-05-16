@@ -5,15 +5,20 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+
+dotenv.config();
+
+const app = express(); 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+app.use(cors());
+app.use(express.json());
+
 // serve frontend files
 app.use(express.static(__dirname));
 
-dotenv.config();
-const app = express();
-app.use(cors());
-app.use(express.json());
 
 
 const token = process.env.GITHUB_TOKEN;
