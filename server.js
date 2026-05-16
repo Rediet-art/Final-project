@@ -3,6 +3,13 @@ import ModelClient from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// serve frontend files
+app.use(express.static(__dirname));
+
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -75,7 +82,9 @@ app.post("/generate", async (req, res) => {
     res.status(500).json({ error: "AI failed" });
   }
 });
-    
+  app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});  
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
