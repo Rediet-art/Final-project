@@ -16,6 +16,15 @@ It includes features such as AI-generated explanations, voice input, parental co
 - Learning history saved per user
 - Profile and navigation pages
 
+
+## Technologies Used
+HTML
+CSS
+JavaScript
+Jest
+Express
+
+
 ## Testing
 
 This project uses Jest for automated testing.
@@ -43,9 +52,4 @@ Current test coverage:
 100% statement, branch, function, and line coverage
 
 
-##Technologies Used
-HTML
-CSS
-JavaScript
-Jest
-Express
+
