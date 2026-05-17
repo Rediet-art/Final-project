@@ -82,6 +82,13 @@ test("Shows logged-in name on dashboard", () => {
   expect(result.showAuthButtons).toBe(false);
 });
 
+test("Shows logged-in email when name is missing", () => {
+  const result = getDashboardUserDisplay(null, "test@email.com");
+
+  expect(result.username).toBe("test@email.com");
+  expect(result.showAuthButtons).toBe(false);
+});
+
 test("Shows guest when dashboard user is logged out", () => {
   const result = getDashboardUserDisplay(null, null);
 
