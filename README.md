@@ -18,11 +18,11 @@ It includes features such as AI-generated explanations, voice input, parental co
 
 
 ## Technologies Used
-HTML
-CSS
-JavaScript
-Jest
-Express
+-HTML
+-CSS
+-JavaScript
+-Jest
+-Express
 
 
 ## Testing
